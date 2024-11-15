@@ -13,8 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: hello test23
-      id: hello-test23
+    - name: hello test
+      id: hello-test
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: hello test
@@ -24,6 +24,6 @@ jobs:
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        HELLO-TEST23_RESULTS: "${{steps.hello-test23.outputs.result}}"
+        HELLO-TEST_RESULTS: "${{steps.hello-test.outputs.result}}"
       with:
-        runners: hello-test23
+        runners: hello-test

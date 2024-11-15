@@ -24,6 +24,6 @@ jobs:
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        HELLO-TEST_RESULTS: "${{steps.hello-test.outputs.result}}"
+        123HELLO-TEST_RESULTS: "${{steps.hello-test.outputs.result}}"
       with:
         runners: hello-test

@@ -24,7 +24,7 @@ jobs:
             event: 'push'   
       - name: Check step executed for JOB
         id: check_Steps
-        uses: madBabel/check-jobs-steps-gha-action@v3
+        uses: madBabel/check-jobs-steps-gha-action@test2
         with:
           run-id: ${{steps.get_workflow.outputs.run_id}}
           job-to-execute: echo-data

@@ -1,7 +1,7 @@
 name: Autograding Tests
 'on':
-- workflow_dispatch
-- repository_dispatch
+ workflow_dispatch:
+ repository_dispatch:
 permissions:
   checks: write
   actions: read
@@ -27,3 +27,49 @@ jobs:
         ERERR_RESULTS: "${{steps.ererr.outputs.result}}"
       with:
         runners: ererr
+
+  get-workflow-context:
+    if: github.actor != 'github-classroom[bot]'    
+    outputs:
+      stepsExecuted: ${{steps.check_Steps.outputs.stepsExecuted}}
+    runs-on: ubuntu-latest
+
+    steps:          
+      - name: Get workFlow Run
+        id: get_workflow
+        uses: madBabel/get-run-id-of-wf-action@v4
+        with:
+            workflow-file: '07-contexts.yaml'    
+            status: 'success'
+            event: 'push'   
+      - name: Check step executed for JOB
+        id: check_Steps
+        uses: madBabel/check-jobs-steps-gha-action@v3
+        with:
+          run-id: ${{steps.get_workflow.outputs.run_id}}
+          job-to-execute: echo-data
+          steps-to-execute:  Show Info,Retrieve Variable,Print Env Variables,Print Env Variables by def
+
+ 
+  autograding-reporter:    
+      if: always()
+      needs: [get-workflow-context]
+      runs-on: ubuntu-latest    
+      steps:           
+      - name: Run Autograding Step Tests
+        uses: classroom-resources/autograding-io-grader@v1      
+        id: test1
+        with:
+            test-name: 'Test 5 executed'   
+            command: 'echo ${{needs.get-workflow-context.outputs.stepsExecuted}}'
+            input: ''
+            expected-output: 'true'
+            comparison-method: 'exact'  
+            max-score: 100     
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1     
+        with:
+            runners: test1
+        env:
+          TEST1_RESULTS: "${{ steps.test1.outputs.result }}"      

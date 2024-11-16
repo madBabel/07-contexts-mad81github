@@ -74,7 +74,7 @@ jobs:
       runs-on: ubuntu-latest
       if: ${{ github.actor != 'github-classroom[bot]'  && always() }}  
       steps:       
-      - name: Any Debug  Job executed
+      - name: Any WF Run with DEBUG
         uses: classroom-resources/autograding-io-grader@v1      
         id: test1
         with:
@@ -84,7 +84,7 @@ jobs:
             expected-output: 'true'
             comparison-method: 'exact'  
             max-score: 40         
-      - name:  Vars Job executed
+      - name:  First steps for echo-data is executed
         uses: classroom-resources/autograding-io-grader@v1      
         id: test2
         with:
@@ -94,7 +94,7 @@ jobs:
             expected-output: 'true'
             comparison-method: 'exact'  
             max-score: 30     
-      - name:  Env Job executed
+      - name:  Print Env Variables steps are executed
         uses: classroom-resources/autograding-io-grader@v1      
         id: test3
         with:

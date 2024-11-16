@@ -51,7 +51,7 @@ jobs:
         with:
             workflow-file: '07-contexts.yaml'    
             status: 'success'
-            event: 'push'   
+                    
       - name: Check step executed for JOB
         id: check_Steps1
         uses: madBabel/check-jobs-steps-gha-action@v4

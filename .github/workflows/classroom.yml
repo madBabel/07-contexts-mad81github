@@ -65,7 +65,7 @@ jobs:
         with:
            run-id: ${{steps.get_workflow.outputs.run_id}}
            job-to-execute: echo-data
-           steps-to-execute:  Print Env Variables,Print Env Variables by def  
+           steps-to-execute: Print Env Variables,Print Env Variables by def
 
     
  

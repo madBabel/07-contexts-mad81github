@@ -6,27 +6,7 @@ permissions:
   checks: write
   actions: read
   contents: read
-jobs:
-  run-autograding-tests:
-    runs-on: ubuntu-latest
-    if: github.actor != 'github-classroom[bot]'
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: ererr
-      id: ererr
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: ererr
-        setup-command: ''
-        command: ererer
-        timeout: 10
-    - name: Autograding Reporter
-      uses: classroom-resources/autograding-grading-reporter@v1
-      env:
-        ERERR_RESULTS: "${{steps.ererr.outputs.result}}"
-      with:
-        runners: ererr
+jobs: 
 
   get-workflow-context:
     if: github.actor != 'github-classroom[bot]'    
@@ -51,10 +31,10 @@ jobs:
           steps-to-execute:  Show Info,Retrieve Variable,Print Env Variables,Print Env Variables by def
 
  
-  autograding-reporter:    
-      if: always()
+  autograding-reporter:          
       needs: [get-workflow-context]
-      runs-on: ubuntu-latest    
+      runs-on: ubuntu-latest
+      if: always()    
       steps:           
       - name: Run Autograding Step Tests
         uses: classroom-resources/autograding-io-grader@v1      
